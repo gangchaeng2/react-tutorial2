@@ -1,0 +1,1 @@
+export const CHANGE_NAME = value => ({ type: 'changeName', value})
