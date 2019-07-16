@@ -1,7 +1,9 @@
 import Base from './Base'
-import Counter from './Counter'
+import UseState from './UseState'
+import UseReducer from './UseReducer'
 
 export {
   Base,
-  Counter,
+  UseState,
+  UseReducer,
 }

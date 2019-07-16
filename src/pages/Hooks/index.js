@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import { Wrap } from './styled'
 
-import { Base, Counter } from './component'
+import { Base, UseState, UseReducer } from './component'
 import withController from './Controller'
 
 const Hook = ({
@@ -13,10 +13,11 @@ const Hook = ({
   return (
     <Wrap>
       <Router basename="/hooks">
+        <Base state={state} dispatch={dispatch} />
+
         <Switch>
-          <Route exact path="/counter" component={ () => <Counter state={state} dispatch={dispatch} /> } />
-          <Route exact path="/reducer" />
-          <Route exact path="/" component={ () => <Base state={state} dispatch={dispatch} /> } />
+          <Route exact path="/useState" component={UseState} />
+          <Route exact path="/useReducer" component={ () => <UseReducer state={state} dispatch={dispatch} /> } />
         </Switch>
       </Router>
     </Wrap>

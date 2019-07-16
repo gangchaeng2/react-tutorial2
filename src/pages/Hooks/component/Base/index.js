@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
+import axios from 'axios'
 
 const Base = withRouter((props) => {
+  const { state } = props
+
+  useEffect(() => {
+    const test = async() => {
+      await axios.get(`https://dog.ceo/api/breeds/list/all`).then(data => {
+        console.log(data)
+      })
+    }
+  
+    test()
+  }, [])
+
   const onChangeToSelect = e => {
     const { value } = e.target
-    const { dispatch, history, state } = props
-    console.log(state)
+    const { dispatch, history } = props
 
     dispatch({
       type: 'select',
@@ -17,10 +29,10 @@ const Base = withRouter((props) => {
   }
 
   return (
-    <select value={props.state.path} onChange={(e) => { onChangeToSelect(e) } }>
-      <option value="/">home</option>
-      <option value="/counter">counter</option>
-      <option value="/reduver">reducer</option>
+    <select value={state.path} onChange={(e) => { onChangeToSelect(e) } }>
+      <option value="">home</option>
+      <option value="/useState">useState</option>
+      <option value="/useReducer">useReducer</option>
     </select>
   )
 })

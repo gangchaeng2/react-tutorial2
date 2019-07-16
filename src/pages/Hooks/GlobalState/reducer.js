@@ -1,17 +1,33 @@
 const initialState = {
   path: '',
-  name: '',
-  nickName: '',
+  cnt: 0,
 }
 
 const reducer = (state = initialState, action) => {
-  console.log(state, action)
   switch(action.type) {
     case 'input':
     case 'select':
       return {
         ...state,
-        [action.name]: action.value
+        [action.name]: action.value,
+      }
+    
+    case 'increment':
+      return {
+        ...state,
+        cnt: state.cnt + 1,
+      }
+
+    case 'decrement':
+      return {
+        ...state,
+        cnt: state.cnt - 1,
+      }
+    
+    case 'resetCnt':
+      return {
+        ...state,
+        cnt: 0,
       }
 
     default:
