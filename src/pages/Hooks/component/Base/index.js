@@ -7,8 +7,11 @@ const Base = withRouter((props) => {
 
   useEffect(() => {
     const test = async() => {
-      await axios.get(`https://dog.ceo/api/breeds/list/all`).then(data => {
-        console.log(data)
+      await axios.get(`https://dog.ceo/api/breeds/list/all`).then(response => {
+        console.log(response)
+        Promise.resolve(response.data, response.status).then(data => {
+          console.log(data.message)
+        })
       })
     }
   
@@ -29,7 +32,7 @@ const Base = withRouter((props) => {
   }
 
   return (
-    <select value={state.path} onChange={(e) => { onChangeToSelect(e) } }>
+    <select value={state.path} onChange={(e) => { onChangeToSelect(e) }}>
       <option value="">home</option>
       <option value="/useState">useState</option>
       <option value="/useReducer">useReducer</option>

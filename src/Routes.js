@@ -3,7 +3,7 @@ import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-d
 import GlobalStyle from './GlobalStyle'
 
 import { Header } from './components'
-import { LifeCycle, Hooks } from './pages'
+import { LifeCycle, Hooks, Redux } from './pages'
 
 export default () => {
   return (
@@ -15,7 +15,7 @@ export default () => {
         <Switch>
           <Route path="/life-cycle" component={LifeCycle} />
           <Route path="/hooks" component={Hooks} />
-          {/* <Route path="/router" component={Router} /> */}
+          <Route path="/redux" component={Redux} />
           <Redirect to="/" />
         </Switch>
       </Router>
