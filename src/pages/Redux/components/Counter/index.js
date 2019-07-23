@@ -3,7 +3,7 @@ import React from 'react'
 const CounterComponent = () => {
   return (
     <div>
-      CounterComponent
+      ggg
     </div>
   )
 }

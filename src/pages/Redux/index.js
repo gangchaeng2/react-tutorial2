@@ -1,36 +1,35 @@
 import React from 'react'
-import { Switch, Route, BrowserRouter as Router, withRouter } from 'react-router-dom'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-dom'
 
-import { Counter, Todo } from './components'
+import rootReducer from './store/modules'
 
-import { Select } from '../../components/Style'
+import { Todo, Select } from './components'
+import { Counter } from './containers'
+
 import { Wrap } from './styled'
 
-const ReduxComponent = ({
-  history, match
-}) => {
-  const onChangePath = (e) => {
-    const { value } = e.target
-    history.push('/redux' + value)
-  }
+// **** 리덕스 개발자도구 적용
+const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+const store = createStore(rootReducer, devTools)
 
+const ReduxComponent = () => {
   return (
-    <Wrap>
-      <Select onChange={onChangePath.bind(null)}>
-        <option value="/">Home</option>
-        <option value="/counter">Counter</option>
-        <option value="/todo">Todo</option>
-      </Select>
-
-      <Router basename="redux">
-        <Switch>
-          {/* <Router exact path="/" component={ () => ( <div>Home</div> ) } /> */}
-          <Route exact path="/counter" component={Counter} />
-          <Route exact path="/todo"  component={Todo} />
-        </Switch>
-      </Router>
-    </Wrap>
+    <Provider store={store}>
+      <Wrap>
+        <Router basename="/redux">
+          <Select />
+  
+          <Switch>
+            <Route path="/todo"  component={Todo} />
+            <Route path="/counter" component={Counter} />
+            <Redirect to="/counter" />
+          </Switch>
+        </Router>
+      </Wrap>
+    </Provider>
   )
 }
 
-export default withRouter(ReduxComponent)
+export default ReduxComponent
