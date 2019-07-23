@@ -45,7 +45,7 @@ const [state, setState] = useState(() => {
 
 React 클래스 컴포넌트의 생명주기와 비슷한 함수로 componentDidMount, componentDidUpdate, componentWillUnMount를 합쳐 놓은 것과 유사하다. 
 
-** 함수형 컴포넌트**
+**함수형 컴포넌트**
 
 ```javascript
 // Similar to componentDidMount and componentDidUpdate:
@@ -79,7 +79,7 @@ useEffect(() => {
 }, [])
 ```
 
-** 특정값이 업데이트 될 때 실행하고 싶을 때**
+**특정값이 업데이트 될 때 실행하고 싶을 때**
 
 ```javascript
   useEffect(() => {
