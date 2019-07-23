@@ -1,8 +1,12 @@
 import React from 'react'
 
-const CounterComponent = () => {
+const CounterComponent = ({
+  number,
+  onClickIncrement,
+}) => {
+  console.log(onClickIncrement)
   return (
-    <div>
+    <div onClick={onClickIncrement}>
       ggg
     </div>
   )
