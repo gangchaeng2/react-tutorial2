@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import { Wrap } from './styled'
 
-import { Base, UseState, UseReducer } from './component'
+import { Base, UseState, UseReducer } from './components'
 import withController from './Controller'
 
 const Hook = ({

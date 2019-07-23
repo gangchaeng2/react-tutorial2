@@ -2,7 +2,7 @@ import React from 'react'
 
 import withController from './Controller'
 
-import Button from './Component/Button'
+import Button from './components/Button'
 
 import { Wrap } from './styled'
 

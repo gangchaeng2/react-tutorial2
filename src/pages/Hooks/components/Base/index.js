@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
+import { Select } from '../../../../components/Style'
+
 const Base = withRouter((props) => {
   const { state } = props
 
@@ -32,11 +34,11 @@ const Base = withRouter((props) => {
   }
 
   return (
-    <select value={state.path} onChange={(e) => { onChangeToSelect(e) }}>
+    <Select value={state.path} onChange={(e) => { onChangeToSelect(e) }}>
       <option value="">home</option>
       <option value="/useState">useState</option>
       <option value="/useReducer">useReducer</option>
-    </select>
+    </Select>
   )
 })
 
