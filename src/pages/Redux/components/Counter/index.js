@@ -1,14 +1,19 @@
 import React from 'react'
 
+import { Wrap, BtnWrap, Btn, Number } from './styled'
+
 const CounterComponent = ({
   number,
-  onClickIncrement,
+  onClickButton,
 }) => {
-  console.log(onClickIncrement)
   return (
-    <div onClick={onClickIncrement}>
-      ggg
-    </div>
+    <Wrap>
+      <Number>{number}</Number>
+      <BtnWrap>
+        <Btn className="Plus" onClick={onClickButton.bind(null, 'plus')}>+</Btn>
+        <Btn className="Minus" onClick={onClickButton.bind(null, 'minus')}>-</Btn>
+      </BtnWrap>
+    </Wrap>
   )
 }
 

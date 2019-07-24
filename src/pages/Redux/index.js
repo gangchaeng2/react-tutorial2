@@ -5,8 +5,8 @@ import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-d
 
 import rootReducer from './store/modules'
 
-import { Todo, Select } from './components'
-import { Counter } from './containers'
+import { Select } from './components'
+import { Counter, Todo } from './containers'
 
 import { Wrap } from './styled'
 

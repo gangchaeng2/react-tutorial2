@@ -10,18 +10,12 @@ export const decrement = () => ({ type: DECREMENT })
 
 // **** 초기상태 정의
 const initialState = {
-  color: 'red',
   number: 0,
 }
 
 // **** 리듀서 작성
 export default function counter(state = initialState, action) {
   switch (action.type) {
-    case CHANGE_COLOR:
-      return {
-        ...state,
-        color: action.color,
-      }
     case INCREMENT:
       return {
         ...state,

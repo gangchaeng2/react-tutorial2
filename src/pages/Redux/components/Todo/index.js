@@ -1,13 +1,34 @@
 import React from 'react'
 
+import { Wrap, InputText, Btn, CardWrap } from './styled'
+
 const TodoComponent = ({
-  history
+  text, category, categoryList,
+  list,
+  onChangeToState, onClickAddTodo
 }) => {
-  console.log(history)
   return (
-    <div>
-      TodoComponent
-    </div>
+    <>
+      <Wrap>
+        <InputText name="category" value={category} onChange={onChangeToState.bind(null)} placeholder="카테고리" />
+        <InputText name="text" value={text} onChange={onChangeToState.bind(null)} placeholder="내용" />
+  
+        <Btn onClick={onClickAddTodo.bind(null)}>추가</Btn>
+      </Wrap>
+  
+      {list && list.length > 0 && 
+        <CardWrap>
+          {list.map((item, key) => {
+            return (
+              <div key={key}>
+                {key}
+                {item.text}
+              </div>
+            )
+          })}
+        </CardWrap>
+      }
+    </>
   )
 }
 
