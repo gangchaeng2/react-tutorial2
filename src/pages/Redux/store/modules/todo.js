@@ -9,7 +9,12 @@ export const removeTodo = ({ idx }) => ({ type: REMOVE_TODO_LIST, idx })
 export const updateTodo = ({ idx, todo }) => ({ type: UPDATE_TODO_LIST, data: todo, idx })
 
 const initialState = {
-  list: [],
+  list: [
+    {
+      category: "Todo",
+      text: "type script"
+    }
+  ],
 }
 
 // const todo = ({ state = initialState, action }) => {
@@ -36,7 +41,6 @@ const initialState = {
 export default handleActions(
   {
     [ADD_TODO_LIST]: (state, action) => {
-      console.log(action)
       return ({
         list: [...state.list, ...action.data],
        })

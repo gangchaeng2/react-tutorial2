@@ -12,6 +12,10 @@ class TodoContainer extends Component {
     categoryList: [],
   }
 
+  componentDidMount() {
+    this.setCategory()
+  }
+
   componentDidUpdate(prevProps, prevState) {
     const { list } = this.props
 
@@ -46,6 +50,13 @@ class TodoContainer extends Component {
     addTodo({ todo: [{text, category}] })
   }
 
+  onClickReset = () => {
+    this.setState({
+      text: '',
+      category: '',
+    })
+  }
+
   render() {
     return (
       <Todo 
@@ -53,6 +64,7 @@ class TodoContainer extends Component {
         {...this.props}
         onChangeToState={this.onChangeToState}
         onClickAddTodo={this.onClickAddTodo}
+        onClickReset={this.onClickReset}
       />
     )
   }
