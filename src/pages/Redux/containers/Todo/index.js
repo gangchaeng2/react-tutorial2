@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { uniq, map } from 'lodash'
+import { find, findIndex, difference, uniq, map } from 'lodash'
 
+import { generateUUID } from '../../../../utils'
+import { addTodo, updateTodo } from '../../../Redux/store/modules/todo'
 import { Todo } from '../../components'
-import { addTodo } from '../../../Redux/store/modules/todo'
 
 class TodoContainer extends Component {
   state = {
+    id: '',
     text: '',
     category: '',
     categoryList: [],
+    mode: 'add',
   }
 
   componentDidMount() {
@@ -18,8 +21,11 @@ class TodoContainer extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { list } = this.props
+    const { categoryList } = this.state
 
-    if (list.length !== prevProps.list.length) {
+    if (list.length !== prevProps.list.length || difference(categoryList, uniq(map(list, (item) => {
+      return item.category
+    }))).length > 0) {
       this.setCategory()
     }
   }
@@ -46,14 +52,42 @@ class TodoContainer extends Component {
   onClickAddTodo = () => {
     const { text, category } = this.state
     const { addTodo } = this.props
+    const id = generateUUID()
 
-    addTodo({ todo: [{text, category}] })
+    this.onClickReset()
+    addTodo({ todo: [{id, text, category}] })
+  }
+
+  onClickUpdateTodo = () => {
+    const { id } = this.state
+    const { list, updateTodo } = this.props
+    const idx = findIndex(list, (item) => ( item.id === id) )
+    const newItem = {
+      id: list[idx].id,
+      text: this.state.text,
+      category: this.state.category,
+    }
+    
+    this.onClickReset()
+    updateTodo({todo: newItem, idx})
   }
 
   onClickReset = () => {
     this.setState({
+      id: '',
       text: '',
       category: '',
+      mode: 'add',
+    })
+  }
+
+  onClickCard = id => {
+    const { list } = this.props
+    const selectItem = find(list, (item) => ( item.id === id ))
+    
+    this.setState({
+      ...selectItem,
+      mode: 'update'
     })
   }
 
@@ -64,7 +98,9 @@ class TodoContainer extends Component {
         {...this.props}
         onChangeToState={this.onChangeToState}
         onClickAddTodo={this.onClickAddTodo}
+        onClickUpdateTodo={this.onClickUpdateTodo}
         onClickReset={this.onClickReset}
+        onClickCard={this.onClickCard}
       />
     )
   }
@@ -72,5 +108,5 @@ class TodoContainer extends Component {
 
 export default connect(
   ({ todo: { list } }) => ({ list }),
-  { addTodo }
+  { addTodo, updateTodo }
 )(TodoContainer)

@@ -1,50 +1,54 @@
-import { handleActions } from 'redux-actions'
+import { createAction, handleActions } from 'redux-actions'
+import update from 'immutability-helper'
 
-const ADD_TODO_LIST = 'todo/ADD_TODO_LIST'
+import { generateUUID } from '../../../../utils'
+
 const REMOVE_TODO_LIST = 'todo/REMOVE_TODO_LIST'
-const UPDATE_TODO_LIST = 'todo/UPDATE_TODO_LIST'
 
-export const addTodo = ({ todo }) => ({ type: ADD_TODO_LIST, data: todo})
+// 액션 생성자
+// const ADD_TODO_LIST = 'todo/ADD_TODO_LIST'
+// export const addTodo = ({ todo }) => ({ type: ADD_TODO_LIST, todo })
+
+// createAction 사용
+export const addTodo = createAction(
+  'todo/ADD_TODO_LIST', 
+  todo => todo,
+)
+
+export const updateTodo = createAction(
+  'todo/UPDATE_TODO_LIST', 
+  ({ todo, idx }) => ({ todo, idx })
+)
+
 export const removeTodo = ({ idx }) => ({ type: REMOVE_TODO_LIST, idx })
-export const updateTodo = ({ idx, todo }) => ({ type: UPDATE_TODO_LIST, data: todo, idx })
 
 const initialState = {
   list: [
     {
+      id: generateUUID(),
+      text: "type script",
       category: "Todo",
-      text: "type script"
     }
   ],
 }
 
-// const todo = ({ state = initialState, action }) => {
-//   console.log(action)
-
-//   switch(action.type) {
-//     case ADD_TODO_LIST:
-//       return {
-//         list: [...state.list, action.data]
-//       }
-
-//     case UPDATE_TODO_LIST:
-//       return {
-//         list: [...state.list, action.data]
-//       }
-
-//     default:
-//       return state
-//   }
-// }
-
-// export default todo
-
 export default handleActions(
   {
-    [ADD_TODO_LIST]: (state, action) => {
+    [addTodo]: (state, action) => {
       return ({
-        list: [...state.list, ...action.data],
-       })
+        list: [...state.list, ...action.payload.todo],
+      })
+    },
+    [updateTodo]: (state, action) => {
+      const { todo, idx } = action.payload
+      console.log(todo, idx)
+
+      return ({
+        list: update(state.list, {
+          [idx]: { $set: todo }
+        })
+      })
     }
-  },
+  }, 
   initialState
 )

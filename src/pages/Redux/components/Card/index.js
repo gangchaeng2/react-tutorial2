@@ -3,9 +3,10 @@ import React from 'react'
 import { Li } from './styled'
 
 export default ({
-  text,
+  id, text,
+  onClickCard,
 }) => (
-  <Li>
+  <Li onClick={onClickCard.bind(null, id)}>
     {text}
   </Li>
 )

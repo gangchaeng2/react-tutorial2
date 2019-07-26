@@ -6,16 +6,16 @@ import { Wrap, InputText, TextArea, Btn, CardWrap, Name } from './styled'
 import Card from '../Card'
 
 const TodoComponent = ({
-  text, category, categoryList,
+  mode, text, category, categoryList,
   list,
-  onChangeToState, onClickReset, onClickAddTodo
+  onChangeToState, onClickReset, onClickAddTodo, onClickUpdateTodo, onClickCard
 }) => {
   return (
     <>
       <Wrap>
         <InputText name="category" value={category} onChange={onChangeToState.bind(null)} placeholder="CATEGORY" />
         <Btn onClick={onClickReset.bind(null)} style={{ backgroundColor: 'red' }}>RESET</Btn>
-        <Btn onClick={onClickAddTodo.bind(null)}>ADD</Btn>
+        {mode === 'add' ? <Btn onClick={onClickAddTodo.bind(null)}>ADD</Btn> : <Btn onClick={onClickUpdateTodo.bind(null)}>UPDATE</Btn>}
 
         <TextArea name="text" value={text} onChange={onChangeToState.bind(null)} placeholder="TEXT" />
       </Wrap>
@@ -30,7 +30,7 @@ const TodoComponent = ({
             <Name>{cate}</Name>
             {cateList.map((item, key) => {
               return (
-                <Card key={key} text={item.text} />
+                <Card key={key} id={item.id} text={item.text} onClickCard={onClickCard} />
               )
             })}
           </CardWrap>
