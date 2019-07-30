@@ -69,7 +69,7 @@ class TodoContainer extends Component {
     }
     
     this.onClickReset()
-    updateTodo({todo: newItem, idx})
+    updateTodo({ todo: newItem, idx })
   }
 
   onClickReset = () => {

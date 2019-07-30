@@ -41,7 +41,6 @@ export default handleActions(
     },
     [updateTodo]: (state, action) => {
       const { todo, idx } = action.payload
-      console.log(todo, idx)
 
       return ({
         list: update(state.list, {

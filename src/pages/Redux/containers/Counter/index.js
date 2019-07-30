@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { increment, decrement } from '../../store/modules/counter'
+import { increment, incrementAsync, decrement } from '../../store/modules/counter'
 import { Counter } from '../../components'
 
 class CounterContainer extends Component {
   onClickButton = type => {
-    const { increment, decrement } = this.props
+    const { incrementAsync, decrement } = this.props
 
     if (type === 'plus') {
-      increment()
+      incrementAsync()
 
     } else {
       decrement()
@@ -28,5 +28,5 @@ class CounterContainer extends Component {
 
 export default connect(
   ({ counter: { number } }) => ({ number }),
-  { increment, decrement },
+  { increment, incrementAsync, decrement },
 )(CounterContainer)
