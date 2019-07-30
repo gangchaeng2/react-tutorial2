@@ -1,32 +1,32 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { increment, incrementAsync, decrement } from '../../store/modules/counter'
+import { incrementAsync, decrementAsync } from '../../store/modules/counter'
 import { Counter } from '../../components'
 
 class CounterContainer extends Component {
   onClickButton = type => {
-    const { incrementAsync, decrement } = this.props
+    const { incrementAsync, decrementAsync } = this.props
 
     if (type === 'plus') {
       incrementAsync()
 
     } else {
-      decrement()
+      decrementAsync()
     }
   }
 
   render() {
-    const { number } = this.props
     const { onClickButton } = this
+    const { number, posts } = this.props
 
     return (
-      <Counter number={number} onClickButton={onClickButton} />
+      <Counter number={number} posts={posts} onClickButton={onClickButton} />
     )
   }
 }
 
 export default connect(
-  ({ counter: { number } }) => ({ number }),
-  { increment, incrementAsync, decrement },
+  ({ counter: { number, posts } }) => ({ number, posts }),
+  { incrementAsync, decrementAsync },
 )(CounterContainer)

@@ -1,30 +1,38 @@
 import axios from 'axios'
-import { delay, call, put, takeEvery, takeLatest } from 'redux-saga/effects'
+import { call, put, takeEvery, select } from 'redux-saga/effects'
 
-const callAPi = url => {
+const BASE_URL = 'https://jsonplaceholder.typicode.com/todos/'
+
+const callAPI = url => {
   return axios.get(url)
 }
 
-export function* incrementAsync(action) {
+function* incrementAsync(action) {
+  // ************ 해당 액션이 발생할 때 까지 대기상태로 있는다.
+  // const action = yield take('counter/DECREMENT')
+
+  // ************ basic get all state
+  // const state = yield select()
+  // ************ get state param
+  // const counter = yield select((state) => state.counter)
+
+  yield put({ type: 'counter/INCREMENT' })
+
+  const number = yield select((state) => state.counter.number)
+
   try {
-    const url = 'https://jsonplaceholder.typicode.com/todos/1'
-    const data = yield call(callAPi, url)
-    yield put({ type: 'counter/CHANGE_COLOR', data: data })
+    const url = `${BASE_URL}${number}`
+    const res = yield call(callAPI, url)
+    yield put({ type: 'counter/ADD_POST', data: res.data })
 
   } catch (err) {
     console.log(err)
   }
-
-  console.log('delay....')
-  yield delay(3000)
-  console.log('increment')
-  yield put({ type: 'counter/INCREMENT' })
 }
 
-export function* decrementAsync(action) {
-  console.log('delay....')
-  yield delay(3000)
-  console.log('decrement')
+function* decrementAsync(action) {
+  // console.log('delay....')
+  // yield delay(3000)
   yield put({ type: 'counter/DECREMENT' })
 }
 
