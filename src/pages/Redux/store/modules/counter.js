@@ -6,7 +6,7 @@ const INCREMENT = 'counter/INCREMENT'
 const DECREMENT = 'counter/DECREMENT'
 
 // **** 액션 생섬함수 정의
-export const increment = data => ({ type: INCREMENT, data })
+export const increment = () => ({ type: INCREMENT })
 export const incrementAsync = () => ({ type: 'INCREMENT_ASYNC' })
 export const decrement = () => ({ type: DECREMENT })
 export const decrementAsync = () => ({ type: 'DECREMENT_ASYNC' })
