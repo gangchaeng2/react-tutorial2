@@ -1,4 +1,3 @@
-
 1\. 소개
 
 -----------
@@ -162,7 +161,7 @@ export default handleActions(
 2. **react-redux** : 리액트 컴포넌트와 리덕스를 연동하는 모듈
 3. **redux-actions **: 액션 생성자와 리듀서를 편하게 사용할 수 있게 만든 모듈
 
-** Ducks패턴을 통해 액션, 액션 생성자, 리듀서를 한 파일로 작성**
+**Ducks패턴을 통해 액션, 액션 생성자, 리듀서를 한 파일로 작성**
 
 ```js
 import update from 'immutability-helper'
@@ -203,7 +202,7 @@ export default function counter(state = initialState, action) {
 }
 ```
 
-** combineReducers로 리듀서 결합**
+**combineReducers로 리듀서 결합**
 
 ```js
 import { combineReducers } from 'redux'
@@ -217,7 +216,7 @@ export default combineReducers({
 })
 ```
 
-** 스토어 생성**
+**스토어 생성**
 
 ```js
 import { createStore } from 'redux'
@@ -232,7 +231,7 @@ export default function configureStore() {
 }
 ```
 
-** Provider를 사용하여 스토어 연동**
+**Provider를 사용하여 스토어 연동**
 
 ```js
 import React from 'react'
@@ -255,17 +254,13 @@ const ReduxComponent = ({
 export default ReduxComponent
 ```
 
-** connect 함수를 이용하여 스토어와 컴포넌트 연동**
-
-**
-**
+**connect 함수를 이용하여 스토어와 컴포넌트 연동**
 
  Presentational 컴포넌트와 Container 컴포넌트로 나누어서 작업을 한다. 
 
- **Presentational 컴포넌트**는 글로벌 상태와 액션 생성자를 props로 받아 UI만 구성하는 컴포넌트로 redux와 연관이 전혀 없는 컴포넌트이다.**
-**
+**Presentational 컴포넌트**는 글로벌 상태와 액션 생성자를 props로 받아 UI만 구성하는 컴포넌트로 redux와 연관이 전혀 없는 컴포넌트이다.
 
- **Container 컴포넌트는 **redux의 상태를 구독하고 실질적으로 action을 보내는 컴포넌트로 redux와 연관이 있는 컴포넌트이다**.**
+ **Container 컴포넌트는** redux의 상태를 구독하고 실질적으로 action을 보내는 컴포넌트로 redux와 연관이 있는 컴포넌트이다.
 
 ```js
 import React, { Component } from 'react'
